@@ -34,15 +34,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.zfs.swipelistviewdemo.R;
-
+import java.util.List;
 import cn.zfs.swipemenulistview.SwipeMenu;
 import cn.zfs.swipemenulistview.SwipeMenuCreator;
 import cn.zfs.swipemenulistview.SwipeMenuItem;
 import cn.zfs.swipemenulistview.SwipeMenuListView;
-
-import java.util.List;
 
 /**
  * SwipeMenuListView
