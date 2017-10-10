@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.zfs.swipelistviewdemo;
+package cn.zfs.swipelistviewdemo;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -43,13 +43,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zfs.swipemenulistview.SwipeController;
-import com.zfs.swipemenulistview.SwipeMenu;
-import com.zfs.swipemenulistview.SwipeMenuCreator;
-import com.zfs.swipemenulistview.SwipeMenuItem;
-import com.zfs.swipemenulistview.SwipeMenuListView;
-
 import java.util.List;
+
+import cn.zfs.swipemenulistview.SwipeController;
+import cn.zfs.swipemenulistview.SwipeMenu;
+import cn.zfs.swipemenulistview.SwipeMenuCreator;
+import cn.zfs.swipemenulistview.SwipeMenuItem;
+import cn.zfs.swipemenulistview.SwipeMenuListView;
 
 /**
  * SwipeMenuListView

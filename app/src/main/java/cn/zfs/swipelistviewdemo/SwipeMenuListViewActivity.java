@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.zfs.swipelistviewdemo;
+package cn.zfs.swipelistviewdemo;
 
 import android.app.Activity;
 import android.content.Intent;

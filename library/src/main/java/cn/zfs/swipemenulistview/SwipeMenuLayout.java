@@ -1,4 +1,4 @@
-package com.zfs.swipemenulistview;
+package cn.zfs.swipemenulistview;
 
 import android.content.Context;
 import android.support.v4.view.GestureDetectorCompat;
@@ -10,7 +10,6 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Interpolator;
-import android.view.animation.LinearInterpolator;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
 

@@ -1,4 +1,4 @@
-package com.zfs.swipemenulistview;
+package cn.zfs.swipemenulistview;
 
 
 import android.content.Context;
