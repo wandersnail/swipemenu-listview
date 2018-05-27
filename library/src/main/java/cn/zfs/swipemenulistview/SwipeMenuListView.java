@@ -310,6 +310,9 @@ public class SwipeMenuListView extends ListView {
 
     /**
      * 判断点击事件是否在某个view
+     * @param view 判断的view
+     * @param ev 事件
+     * @return 返回是否在
      */
     public static boolean inRangeOfView(View view, MotionEvent ev) {
         int[] location = new int[2];

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
+import android.widget.OverScroller;
 
 public class SwipeMenuLayout extends FrameLayout {
     private static final int CONTENT_VIEW_ID = 1;
@@ -33,8 +34,8 @@ public class SwipeMenuLayout extends FrameLayout {
     private boolean isFling;
     private int MIN_FLING = dp2px(5);
     private int MAX_VELOCITYX = dp2px(200);
-    private ScrollerCompat mOpenScroller;
-    private ScrollerCompat mCloseScroller;
+    private OverScroller mOpenScroller;
+    private OverScroller mCloseScroller;
     private int mBaseX;
     private int position;
     private Interpolator mCloseInterpolator;
@@ -99,14 +100,14 @@ public class SwipeMenuLayout extends FrameLayout {
         mGestureDetector = new GestureDetectorCompat(getContext(), mGestureListener);
 
         if (mCloseInterpolator != null) {
-            mCloseScroller = ScrollerCompat.create(getContext(), mCloseInterpolator);
+            mCloseScroller = new OverScroller(getContext(), mCloseInterpolator);
         } else {
-            mCloseScroller = ScrollerCompat.create(getContext());
+            mCloseScroller = new OverScroller(getContext());
         }
         if (mOpenInterpolator != null) {
-            mOpenScroller = ScrollerCompat.create(getContext(), mOpenInterpolator);
+            mOpenScroller = new OverScroller(getContext(), mOpenInterpolator);
         } else {
-            mOpenScroller = ScrollerCompat.create(getContext());
+            mOpenScroller = new OverScroller(getContext());
         }
 
         LayoutParams contentParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -181,11 +182,6 @@ public class SwipeMenuLayout extends FrameLayout {
         return state == STATE_OPEN;
     }
     
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
-    }
-
     private void swipe(int dis) {
         if (!mSwipEnable) {
             return;
