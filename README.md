@@ -13,7 +13,7 @@
 在module的build.gradle添加依赖：
 
 	dependencies {
-		compile 'com.github.fszeng2011:treeadapter:2.0.0'
+		compile 'com.github.fszeng2011:treeadapter:1.0.0'
 	}
 
 ## 代码托管
