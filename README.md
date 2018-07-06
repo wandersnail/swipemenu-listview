@@ -13,11 +13,11 @@
 在module的build.gradle添加依赖：
 
 	dependencies {
-		compile 'com.github.fszeng2011:treeadapter:1.0.0'
+		implementation 'com.github.fszeng2011:swipemenulistview:1.0.0'
 	}
 
 ## 代码托管
-[![JitPack](https://img.shields.io/badge/JitPack-swipemenulistview-green.svg?style=flat)](https://jitpack.io/#fszeng2011/swipemenulistview)
+[![](https://jitpack.io/v/fszeng2011/swipemenulistview.svg)](https://jitpack.io/#fszeng2011/swipemenulistview)
 [![Download](https://api.bintray.com/packages/fszeng2017/maven/swipemenulistview/images/download.svg) ](https://bintray.com/fszeng2017/maven/swipemenulistview/_latestVersion)
 [![JCenter](https://img.shields.io/badge/JCenter-1.0.0-green.svg?style=flat)](http://jcenter.bintray.com/com/github/fszeng2011/swipemenulistview/1.0.0/)
 
