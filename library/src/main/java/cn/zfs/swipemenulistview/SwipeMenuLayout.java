@@ -2,7 +2,6 @@ package cn.zfs.swipemenulistview;
 
 import android.content.Context;
 import android.support.v4.view.GestureDetectorCompat;
-import android.support.v4.widget.ScrollerCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.GestureDetector.OnGestureListener;
@@ -15,8 +14,6 @@ import android.widget.FrameLayout;
 import android.widget.OverScroller;
 
 public class SwipeMenuLayout extends FrameLayout {
-    private static final int CONTENT_VIEW_ID = 1;
-    private static final int MENU_VIEW_ID = 2;
 
     private static final int STATE_CLOSE = 0;
     private static final int STATE_OPEN = 1;
@@ -112,11 +109,6 @@ public class SwipeMenuLayout extends FrameLayout {
 
         LayoutParams contentParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         mContentView.setLayoutParams(contentParams);
-        if (mContentView.getId() < 1) {
-            mContentView.setId(CONTENT_VIEW_ID);
-        }
-
-        mMenuView.setId(MENU_VIEW_ID);
         mMenuView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
         addView(mContentView);
@@ -241,25 +233,21 @@ public class SwipeMenuLayout extends FrameLayout {
         }
         postInvalidate();
     }
-    
+
     public void closeMenu() {
         if (mCloseScroller.computeScrollOffset()) {
             mCloseScroller.abortAnimation();
         }
-        if (state == STATE_OPEN) {
-            state = STATE_CLOSE;
-            swipe(0);
-        }
+        state = STATE_CLOSE;
+        swipe(0);
     }
 
     public void openMenu() {
         if (!mSwipEnable) {
             return;
         }
-        if (state == STATE_CLOSE) {
-            state = STATE_OPEN;
-            swipe(mMenuView.getWidth() * mSwipeDirection);
-        }
+        state = STATE_OPEN;
+        swipe(mMenuView.getWidth() * mSwipeDirection);
     }
 
     public View getContentView() {
