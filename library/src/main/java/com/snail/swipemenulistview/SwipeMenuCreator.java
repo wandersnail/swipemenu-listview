@@ -1,4 +1,4 @@
-package cn.zfs.swipemenulistview;
+package com.snail.swipemenulistview;
 
 
 public interface SwipeMenuCreator {

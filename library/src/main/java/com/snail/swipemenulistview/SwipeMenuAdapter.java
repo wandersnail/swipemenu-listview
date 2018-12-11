@@ -1,4 +1,4 @@
-package cn.zfs.swipemenulistview;
+package com.snail.swipemenulistview;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -43,8 +43,7 @@ public class SwipeMenuAdapter implements WrapperListAdapter, SwipeMenuView.OnSwi
             SwipeMenuView menuView = new SwipeMenuView(menu, (SwipeMenuListView) parent);
             menuView.setOnSwipeItemClickListener(this);
             SwipeMenuListView listView = (SwipeMenuListView) parent;
-            layout = new SwipeMenuLayout(contentView, menuView,
-                    listView.getCloseInterpolator(), listView.getOpenInterpolator());
+            layout = new SwipeMenuLayout(contentView, menuView, listView.getCloseInterpolator(), listView.getOpenInterpolator());
             layout.setPosition(position);
         } else {
             layout = (SwipeMenuLayout) convertView;

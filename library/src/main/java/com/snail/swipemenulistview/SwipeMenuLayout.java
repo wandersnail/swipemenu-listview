@@ -1,4 +1,4 @@
-package cn.zfs.swipemenulistview;
+package com.snail.swipemenulistview;
 
 import android.content.Context;
 import android.support.v4.view.GestureDetectorCompat;
@@ -45,8 +45,7 @@ public class SwipeMenuLayout extends FrameLayout {
         this(contentView, menuView, null, null);
     }
 
-    public SwipeMenuLayout(View contentView, SwipeMenuView menuView, Interpolator closeInterpolator, 
-                           Interpolator openInterpolator) {
+    public SwipeMenuLayout(View contentView, SwipeMenuView menuView, Interpolator closeInterpolator, Interpolator openInterpolator) {
         super(contentView.getContext());
         mCloseInterpolator = closeInterpolator;
         mOpenInterpolator = openInterpolator;

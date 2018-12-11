@@ -37,10 +37,10 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import cn.zfs.swipemenulistview.SwipeController
-import cn.zfs.swipemenulistview.SwipeMenuCreator
-import cn.zfs.swipemenulistview.SwipeMenuItem
-import cn.zfs.swipemenulistview.SwipeMenuListView
+import com.snail.swipemenulistview.SwipeController
+import com.snail.swipemenulistview.SwipeMenuCreator
+import com.snail.swipemenulistview.SwipeMenuItem
+import com.snail.swipemenulistview.SwipeMenuListView
 
 /**
  * SwipeMenuListView

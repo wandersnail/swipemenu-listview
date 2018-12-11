@@ -9,19 +9,31 @@
 - 优化手势加速开启、关闭条目菜单。
 - 其他一些小修改
 
-## 使用方法
-在module的build.gradle添加依赖：
+# 使用方法
 
-	dependencies {
-		implementation 'com.github.fszeng2011:swipemenulistview:1.0.0'
+1. 在project的build.gradle里的repositories添加内容，最好两个都加上，有时jitpack会抽风，同步不下来。
+```
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+		maven { url 'https://dl.bintray.com/wandersnail/android/' }
 	}
+}
+```
+2. module的build.gradle中的添加依赖：
+```
+dependencies {
+	...
+	implementation 'com.github.wandersnail:treeadapter:1.0.0'
+}
+```
 
 ## 代码托管
-[![](https://jitpack.io/v/fszeng2011/swipemenulistview.svg)](https://jitpack.io/#fszeng2011/swipemenulistview)
-[![Download](https://api.bintray.com/packages/fszeng2017/maven/swipemenulistview/images/download.svg) ](https://bintray.com/fszeng2017/maven/swipemenulistview/_latestVersion)
-[![JCenter](https://img.shields.io/badge/JCenter-1.0.0-green.svg?style=flat)](http://jcenter.bintray.com/com/github/fszeng2011/swipemenulistview/1.0.0/)
+[![](https://jitpack.io/v/wandersnail/swipemenulistview.svg)](https://jitpack.io/#wandersnail/swipemenulistview)
+[![Download](https://api.bintray.com/packages/wandersnail/android/swipemenulistview/images/download.svg) ](https://bintray.com/wandersnail/android/swipemenulistview/_latestVersion)
 
 ## 示例效果
-![image](https://github.com/fszeng2011/swipemenulistview/blob/master/screenshot/device-2018-05-27-191134.png)
-![image](https://github.com/fszeng2011/swipemenulistview/blob/master/screenshot/device-2018-05-27-191220.png)
-![image](https://github.com/fszeng2011/swipemenulistview/blob/master/screenshot/device-2018-05-27-191233.png)
+![image](https://github.com/wandersnail/swipemenulistview/blob/master/screenshot/device-2018-05-27-191134.png)
+![image](https://github.com/wandersnail/swipemenulistview/blob/master/screenshot/device-2018-05-27-191220.png)
+![image](https://github.com/wandersnail/swipemenulistview/blob/master/screenshot/device-2018-05-27-191233.png)

@@ -1,4 +1,4 @@
-package cn.zfs.swipemenulistview;
+package com.snail.swipemenulistview;
 
 import android.content.Context;
 import android.util.AttributeSet;
