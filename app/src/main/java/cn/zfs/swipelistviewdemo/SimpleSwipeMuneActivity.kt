@@ -31,11 +31,9 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.util.TypedValue
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import com.snail.swipemenulistview.SwipeController
 import com.snail.swipemenulistview.SwipeMenuCreator
@@ -61,6 +59,12 @@ class SimpleSwipeMuneActivity : AppCompatActivity() {
 
         mAdapter = AppAdapter()
         mListView!!.adapter = mAdapter
+        val tv = TextView(this)
+        tv.text = "这是一个HeaderView"
+        tv.gravity = Gravity.CENTER
+        tv.layoutParams = AbsListView.LayoutParams(-1, 80)
+        mListView!!.addHeaderView(tv)
+        mListView?.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT_TO_RIGHT)
 
         // step 1. create a MenuCreator
         val creator = SwipeMenuCreator { menu ->
@@ -119,18 +123,24 @@ class SimpleSwipeMuneActivity : AppCompatActivity() {
 
             override fun onSwipeStart(position: Int) {
                 // swipe start
+                Log.e("SimpleSwipeMuneActivity", "onSwipeStart: $position")
             }
 
             override fun onSwipeEnd(position: Int) {
                 // swipe end
+                Log.e("SimpleSwipeMuneActivity", "onSwipeEnd: $position")
             }
         })
 
         // set MenuStateChangeListener
         mListView!!.setOnMenuStateChangeListener(object : SwipeMenuListView.OnMenuStateChangeListener {
-            override fun onMenuOpen(position: Int) {}
+            override fun onMenuOpen(position: Int) {
+                Log.e("SimpleSwipeMuneActivity", "onMenuOpen: $position")
+            }
 
-            override fun onMenuClose(position: Int) {}
+            override fun onMenuClose(position: Int) {
+                Log.e("SimpleSwipeMuneActivity", "onMenuClose: $position")
+            }
         })
 
         // other setting
@@ -138,11 +148,13 @@ class SimpleSwipeMuneActivity : AppCompatActivity() {
 
         // test item long click
         mListView!!.onItemLongClickListener = AdapterView.OnItemLongClickListener { parent, view, position, id ->
-            showSingleToast(position.toString() + " long click")
+            showSingleToast(" long click: $position")
             false
         }
 
-        mListView!!.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id -> showSingleToast(position.toString() + "click") }
+        mListView!!.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id -> 
+            showSingleToast("click: $position") 
+        }
 
     }
 
@@ -242,11 +254,11 @@ class SimpleSwipeMuneActivity : AppCompatActivity() {
         val id = item.itemId
 
         if (id == R.id.action_left) {
-            mListView!!.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT)
+            mListView!!.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT_TO_LEFT)
             return true
         }
         if (id == R.id.action_right) {
-            mListView!!.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT)
+            mListView!!.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT_TO_RIGHT)
             return true
         }
 

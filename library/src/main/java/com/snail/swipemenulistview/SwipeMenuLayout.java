@@ -185,9 +185,8 @@ public class SwipeMenuLayout extends FrameLayout {
 
         mContentView.layout(-dis, mContentView.getTop(), mContentView.getWidth() - dis, getMeasuredHeight());
 
-        if (mSwipeDirection == SwipeMenuListView.DIRECTION_LEFT) {
-            mMenuView.layout(mContentView.getWidth() - dis, mMenuView.getTop(),
-                    mContentView.getWidth() + mMenuView.getWidth() - dis, mMenuView.getBottom());
+        if (mSwipeDirection == SwipeMenuListView.DIRECTION_RIGHT_TO_LEFT) {
+            mMenuView.layout(mContentView.getWidth() - dis, mMenuView.getTop(), mContentView.getWidth() + mMenuView.getWidth() - dis, mMenuView.getBottom());
         } else {
             mMenuView.layout(-mMenuView.getWidth() - dis, mMenuView.getTop(), -dis, mMenuView.getBottom());
         }
@@ -210,7 +209,7 @@ public class SwipeMenuLayout extends FrameLayout {
 
     public void smoothCloseMenu() {
         state = STATE_CLOSE;
-        if (mSwipeDirection == SwipeMenuListView.DIRECTION_LEFT) {
+        if (mSwipeDirection == SwipeMenuListView.DIRECTION_RIGHT_TO_LEFT) {
             mBaseX = -mContentView.getLeft();
             mCloseScroller.startScroll(0, 0, mMenuView.getWidth(), 0, 400);
         } else {
@@ -225,7 +224,7 @@ public class SwipeMenuLayout extends FrameLayout {
             return;
         }
         state = STATE_OPEN;
-        if (mSwipeDirection == SwipeMenuListView.DIRECTION_LEFT) {
+        if (mSwipeDirection == SwipeMenuListView.DIRECTION_RIGHT_TO_LEFT) {
             mOpenScroller.startScroll(-mContentView.getLeft(), 0, mMenuView.getWidth(), 0, 400);
         } else {
             mOpenScroller.startScroll(mContentView.getLeft(), 0, mMenuView.getWidth(), 0, 400);
@@ -272,9 +271,8 @@ public class SwipeMenuLayout extends FrameLayout {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         mContentView.layout(0, 0, getMeasuredWidth(), mContentView.getMeasuredHeight());
-        if (mSwipeDirection == SwipeMenuListView.DIRECTION_LEFT) {
-            mMenuView.layout(getMeasuredWidth(), 0, getMeasuredWidth() + mMenuView.getMeasuredWidth(),
-                    mContentView.getMeasuredHeight());
+        if (mSwipeDirection == SwipeMenuListView.DIRECTION_RIGHT_TO_LEFT) {
+            mMenuView.layout(getMeasuredWidth(), 0, getMeasuredWidth() + mMenuView.getMeasuredWidth(), mContentView.getMeasuredHeight());
         } else {
             mMenuView.layout(-mMenuView.getMeasuredWidth(), 0, 0, mContentView.getMeasuredHeight());
         }

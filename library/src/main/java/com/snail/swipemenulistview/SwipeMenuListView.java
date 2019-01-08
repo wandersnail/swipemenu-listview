@@ -14,8 +14,8 @@ public class SwipeMenuListView extends ListView {
     private static final int TOUCH_STATE_X = 1;
     private static final int TOUCH_STATE_Y = 2;
 
-    public static final int DIRECTION_LEFT = 1;
-    public static final int DIRECTION_RIGHT = -1;
+    public static final int DIRECTION_RIGHT_TO_LEFT = 1;
+    public static final int DIRECTION_LEFT_TO_RIGHT = -1;
     private int mDirection = 1;//swipe from right to left by default
 
     private int MAX_Y = 5;
@@ -133,7 +133,7 @@ public class SwipeMenuListView extends ListView {
                     if (mTouchState == TOUCH_STATE_NONE) {
                         if (dy > MAX_Y) {
                             mTouchState = TOUCH_STATE_Y;
-                        } else if (dx > MAX_X) {
+                        } else {
                             mTouchState = TOUCH_STATE_X;
                             if (mOnSwipeListener != null) {
                                 mOnSwipeListener.onSwipeStart(mTouchPosition);
@@ -230,14 +230,14 @@ public class SwipeMenuListView extends ListView {
                                 mOnMenuStateChangeListener.onMenuClose(mTouchPosition);
                             }
                         }
+                        if (mOnSwipeListener != null) {
+                            mOnSwipeListener.onSwipeEnd(mTouchPosition);
+                        }
                         if (!isAfterOpen) {
                             mTouchPosition = -1;
                             mTouchView = null;
                         }
-                    }
-                    if (mOnSwipeListener != null) {
-                        mOnSwipeListener.onSwipeEnd(mTouchPosition);
-                    }
+                    }                    
                     ev.setAction(MotionEvent.ACTION_CANCEL);
                     super.onTouchEvent(ev);
                     return true;
