@@ -30,11 +30,11 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.snail.swipemenulistview.SwipeController
 import com.snail.swipemenulistview.SwipeMenuCreator
 import com.snail.swipemenulistview.SwipeMenuItem
