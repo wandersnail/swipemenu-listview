@@ -35,10 +35,7 @@ import android.util.TypedValue
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.snail.swipemenulistview.SwipeController
-import com.snail.swipemenulistview.SwipeMenuCreator
-import com.snail.swipemenulistview.SwipeMenuItem
-import com.snail.swipemenulistview.SwipeMenuListView
+import com.snail.swipemenulistview.*
 
 /**
  * SwipeMenuListView
@@ -66,57 +63,61 @@ class SimpleSwipeMuneActivity : AppCompatActivity() {
         mListView!!.addHeaderView(tv)
         mListView?.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT_TO_RIGHT)
 
-        // step 1. create a MenuCreator
-        val creator = SwipeMenuCreator { menu ->
-            // create "open" item
-            val openItem = SwipeMenuItem(
-                    applicationContext)
-            // set item background
-            openItem.background = ColorDrawable(Color.rgb(0xC9, 0xC9,
-                    0xCE))
-            // set item width
-            openItem.width = dp2px(90)
-            // set item title
-            openItem.title = "Open"
-            // set item title fontsize
-            openItem.titleSize = dp2px(18)
-            // set item title font color
-            openItem.titleColor = Color.WHITE
-            // add to menu
-            menu.addMenuItem(openItem)
+        val creator = object : SwipeMenuCreator {
+            override fun create(menu: SwipeMenu) {
+                // create "open" item
+                val openItem = SwipeMenuItem(
+                        applicationContext)
+                // set item background
+                openItem.background = ColorDrawable(Color.rgb(0xC9, 0xC9,
+                        0xCE))
+                // set item width
+                openItem.width = dp2px(90)
+                // set item title
+                openItem.title = "Open"
+                // set item title fontsize
+                openItem.titleSize = dp2px(18)
+                // set item title font color
+                openItem.titleColor = Color.WHITE
+                // add to menu
+                menu.addMenuItem(openItem)
 
-            // create "delete" item
-            val deleteItem = SwipeMenuItem(
-                    applicationContext)
-            // set item background
-            deleteItem.background = ColorDrawable(Color.rgb(0xF9,
-                    0x3F, 0x25))
-            // set item width
-            deleteItem.width = dp2px(90)
-            // set a icon
-            deleteItem.setIcon(R.mipmap.ic_delete)
-            // add to menu
-            menu.addMenuItem(deleteItem)
+                // create "delete" item
+                val deleteItem = SwipeMenuItem(
+                        applicationContext)
+                // set item background
+                deleteItem.background = ColorDrawable(Color.rgb(0xF9,
+                        0x3F, 0x25))
+                // set item width
+                deleteItem.width = dp2px(90)
+                // set a icon
+                deleteItem.setIcon(R.mipmap.ic_delete)
+                // add to menu
+                menu.addMenuItem(deleteItem)
+            }
         }
+        
         // set creator
         mListView!!.setMenuCreator(creator)
 
         // step 2. listener item click event
-        mListView!!.setOnMenuItemClickListener { position, menu, index ->
-            val item = mAppList!![position]
-            when (index) {
-                0 ->
-                    // open
-                    open(item)
-                1 -> {
-                    // delete
-                    //					delete(item);
-                    mAppList!!.removeAt(position)
-                    mAdapter!!.notifyDataSetChanged()
+        mListView?.setOnMenuItemClickListener(object : SwipeMenuListView.OnMenuItemClickListener {
+            override fun onMenuItemClick(position: Int, menu: SwipeMenu, index: Int): Boolean {
+                val item = mAppList!![position]
+                when (index) {
+                    0 ->
+                        // open
+                        open(item)
+                    1 -> {
+                        // delete
+                        //					delete(item);
+                        mAppList!!.removeAt(position)
+                        mAdapter!!.notifyDataSetChanged()
+                    }
                 }
+                return false
             }
-            false
-        }
+        })
 
         // set SwipeListener
         mListView!!.setOnSwipeListener(object : SwipeMenuListView.OnSwipeListener {

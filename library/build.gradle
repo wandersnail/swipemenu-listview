@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.novoda.bintray-release'
+
+def lib_version = '1.1.0'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -7,9 +10,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName '1.1.0'
+        versionName "$lib_version"
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -24,6 +26,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     compileOnly "androidx.appcompat:appcompat:$appcompat_version"
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 // 打包源码
@@ -41,7 +44,7 @@ publish {
     userOrg = 'wandersnail' //bintray.com用户名  
     groupId = 'com.github.wandersnail' //jcenter上的路径 
     artifactId = 'swipemenulistview' //项目名称  
-    publishVersion = '1.1.0' //版本号
+    publishVersion = "$lib_version" //版本号
     desc = '带侧滑菜单ListView'
     website = 'https://github.com/wandersnail'
 }
