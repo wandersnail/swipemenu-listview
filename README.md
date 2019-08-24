@@ -39,7 +39,7 @@ allprojects {
 ```
 dependencies {
 	...
-	implementation 'cn.wandersnail:swipemenulistview:latestVersion'
+	implementation 'cn.wandersnail:swipemenu-listview:latestVersion'
 }
 ```
 
