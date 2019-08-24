@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.zfs.swipelistviewdemo
+package cn.wandersnail.listview.swipe.example
 
 import android.content.ComponentName
 import android.content.Intent
@@ -35,7 +35,7 @@ import android.util.TypedValue
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.snail.swipemenulistview.*
+import cn.wandersnail.listview.swipe.*
 
 /**
  * SwipeMenuListView
@@ -66,34 +66,30 @@ class SimpleSwipeMuneActivity : AppCompatActivity() {
         val creator = object : SwipeMenuCreator {
             override fun create(menu: SwipeMenu) {
                 // create "open" item
-                val openItem = SwipeMenuItem(
-                        applicationContext)
+                val openItem = SwipeMenuItem()
                 // set item background
-                openItem.background = ColorDrawable(Color.rgb(0xC9, 0xC9,
-                        0xCE))
+                openItem.setBackground(ColorDrawable(Color.rgb(0xC9, 0xC9, 0xCE)))
                 // set item width
-                openItem.width = dp2px(90)
+                openItem.setWidth(dp2px(90))
                 // set item title
-                openItem.title = "Open"
+                openItem.setTitle("Open")
                 // set item title fontsize
-                openItem.titleSize = dp2px(18)
+                openItem.setTitleSize(dp2px(18))
                 // set item title font color
-                openItem.titleColor = Color.WHITE
+                openItem.setTitleColor(Color.WHITE)
                 // add to menu
-                menu.addMenuItem(openItem)
+                menu.addItem(openItem)
 
                 // create "delete" item
-                val deleteItem = SwipeMenuItem(
-                        applicationContext)
+                val deleteItem = SwipeMenuItem()
                 // set item background
-                deleteItem.background = ColorDrawable(Color.rgb(0xF9,
-                        0x3F, 0x25))
+                deleteItem.setBackground(ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)))
                 // set item width
-                deleteItem.width = dp2px(90)
+                deleteItem.setWidth(dp2px(90))
                 // set a icon
-                deleteItem.setIcon(R.mipmap.ic_delete)
+                deleteItem.setIcon(this@SimpleSwipeMuneActivity, R.mipmap.ic_delete)
                 // add to menu
-                menu.addMenuItem(deleteItem)
+                menu.addItem(deleteItem)
             }
         }
         
@@ -118,28 +114,20 @@ class SimpleSwipeMuneActivity : AppCompatActivity() {
                 return false
             }
         })
-
-        // set SwipeListener
-        mListView!!.setOnSwipeListener(object : SwipeMenuListView.OnSwipeListener {
-
+        mListView!!.setOnMenuStateChangeListener(object : SwipeMenuListView.OnMenuStateChangeListener {
             override fun onSwipeStart(position: Int) {
-                // swipe start
                 Log.e("SimpleSwipeMuneActivity", "onSwipeStart: $position")
             }
 
             override fun onSwipeEnd(position: Int) {
-                // swipe end
                 Log.e("SimpleSwipeMuneActivity", "onSwipeEnd: $position")
             }
-        })
 
-        // set MenuStateChangeListener
-        mListView!!.setOnMenuStateChangeListener(object : SwipeMenuListView.OnMenuStateChangeListener {
-            override fun onMenuOpen(position: Int) {
+            override fun onMenuOpened(position: Int) {
                 Log.e("SimpleSwipeMuneActivity", "onMenuOpen: $position")
             }
 
-            override fun onMenuClose(position: Int) {
+            override fun onMenuClosed(position: Int) {
                 Log.e("SimpleSwipeMuneActivity", "onMenuClose: $position")
             }
         })
@@ -198,6 +186,9 @@ class SimpleSwipeMuneActivity : AppCompatActivity() {
     }
 
     internal inner class AppAdapter : BaseAdapter(), SwipeController {
+        override fun isSwipeEnabled(position: Int): Boolean {
+            return true
+        }
 
         override fun getCount(): Int {
             return mAppList!!.size
@@ -234,10 +225,6 @@ class SimpleSwipeMuneActivity : AppCompatActivity() {
                 tv_name = view.findViewById<View>(R.id.tv_name) as TextView
                 view.tag = this
             }
-        }
-
-        override fun getSwipeEnableByPosition(position: Int): Boolean {
-            return true
         }
     }
 

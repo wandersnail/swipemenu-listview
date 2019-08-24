@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.zfs.swipelistviewdemo;
+package cn.wandersnail.listview.swipe.example;
 
 import android.app.Activity;
 import android.content.Intent;

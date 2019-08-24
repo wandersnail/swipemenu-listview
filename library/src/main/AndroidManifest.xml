@@ -1,7 +1,2 @@
-<manifest package="com.snail.swipemenulistview">
-
-    <application>
-
-    </application>
-
-</manifest>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.wandersnail.listview.swipe" />

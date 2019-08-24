@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cn.zfs.swipelistviewdemo;
+package cn.wandersnail.listview.swipe.example;
 
 import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
@@ -34,14 +34,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.snail.swipemenulistview.SwipeMenu;
-import com.snail.swipemenulistview.SwipeMenuCreator;
-import com.snail.swipemenulistview.SwipeMenuItem;
-import com.snail.swipemenulistview.SwipeMenuListView;
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
+import cn.wandersnail.listview.swipe.SwipeMenu;
+import cn.wandersnail.listview.swipe.SwipeMenuCreator;
+import cn.wandersnail.listview.swipe.SwipeMenuItem;
+import cn.wandersnail.listview.swipe.SwipeMenuListView;
 
 /**
  * SwipeMenuListView
@@ -68,7 +70,7 @@ public class DifferentSwipeMenuActivity extends AppCompatActivity {
             @Override
             public void create(SwipeMenu menu) {
                 // Create different menus depending on the view type
-                switch (menu.getViewType()) {
+                switch (menu.getItemViewType()) {
                     case 0:
                         createMenu1(menu);
                         break;
@@ -82,54 +84,48 @@ public class DifferentSwipeMenuActivity extends AppCompatActivity {
             }
 
             private void createMenu1(SwipeMenu menu) {
-                SwipeMenuItem item1 = new SwipeMenuItem(
-                        getApplicationContext());
+                SwipeMenuItem item1 = new SwipeMenuItem();
                 item1.setBackground(new ColorDrawable(Color.rgb(0xE5, 0x18,
                         0x5E)));
                 item1.setWidth(dp2px(90));
-                item1.setIcon(R.mipmap.ic_action_favorite);
-                menu.addMenuItem(item1);
-                SwipeMenuItem item2 = new SwipeMenuItem(
-                        getApplicationContext());
+                item1.setIcon(DifferentSwipeMenuActivity.this, R.mipmap.ic_action_favorite);
+                menu.addItem(item1);
+                SwipeMenuItem item2 = new SwipeMenuItem();
                 item2.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
                         0xCE)));
                 item2.setWidth(dp2px(90));
-                item2.setIcon(R.mipmap.ic_action_good);
-                menu.addMenuItem(item2);
+                item2.setIcon(DifferentSwipeMenuActivity.this, R.mipmap.ic_action_good);
+                menu.addItem(item2);
             }
 
             private void createMenu2(SwipeMenu menu) {
-                SwipeMenuItem item1 = new SwipeMenuItem(
-                        getApplicationContext());
+                SwipeMenuItem item1 = new SwipeMenuItem();
                 item1.setBackground(new ColorDrawable(Color.rgb(0xE5, 0xE0,
                         0x3F)));
                 item1.setWidth(dp2px(90));
-                item1.setIcon(R.mipmap.ic_action_important);
-                menu.addMenuItem(item1);
-                SwipeMenuItem item2 = new SwipeMenuItem(
-                        getApplicationContext());
+                item1.setIcon(DifferentSwipeMenuActivity.this, R.mipmap.ic_action_important);
+                menu.addItem(item1);
+                SwipeMenuItem item2 = new SwipeMenuItem();
                 item2.setBackground(new ColorDrawable(Color.rgb(0xF9,
                         0x3F, 0x25)));
                 item2.setWidth(dp2px(90));
-                item2.setIcon(R.mipmap.ic_action_discard);
-                menu.addMenuItem(item2);
+                item2.setIcon(DifferentSwipeMenuActivity.this, R.mipmap.ic_action_discard);
+                menu.addItem(item2);
             }
 
             private void createMenu3(SwipeMenu menu) {
-                SwipeMenuItem item1 = new SwipeMenuItem(
-                        getApplicationContext());
+                SwipeMenuItem item1 = new SwipeMenuItem();
                 item1.setBackground(new ColorDrawable(Color.rgb(0x30, 0xB1,
                         0xF5)));
                 item1.setWidth(dp2px(90));
-                item1.setIcon(R.mipmap.ic_action_about);
-                menu.addMenuItem(item1);
-                SwipeMenuItem item2 = new SwipeMenuItem(
-                        getApplicationContext());
+                item1.setIcon(DifferentSwipeMenuActivity.this, R.mipmap.ic_action_about);
+                menu.addItem(item1);
+                SwipeMenuItem item2 = new SwipeMenuItem();
                 item2.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
                         0xCE)));
                 item2.setWidth(dp2px(90));
-                item2.setIcon(R.mipmap.ic_action_share);
-                menu.addMenuItem(item2);
+                item2.setIcon(DifferentSwipeMenuActivity.this, R.mipmap.ic_action_share);
+                menu.addItem(item2);
             }
         };
         // set creator
@@ -138,7 +134,7 @@ public class DifferentSwipeMenuActivity extends AppCompatActivity {
         // step 2. listener item click event
         listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
-            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+            public boolean onMenuItemClick(int position, @NotNull SwipeMenu menu, int index) {
                 ApplicationInfo item = mAppList.get(position);
                 switch (index) {
                     case 0:

@@ -1,50 +1,122 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'maven'
 
-def lib_version = '1.1.0'
+def lib_version = '1.0.0'
+def user_name = 'wandersnail'
+def lib_group = 'cn.wandersnail'
+def lib_artifact = 'swipemenu-listview'
+def lib_packaging = 'aar'
+def lib_description = 'swipemenu-listview for Android'
+def lib_website = 'https://github.com/wandersnail/swipemenu-listview'
+group = lib_group
+version = lib_version
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion rootProject.ext.ver_target_sdk
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.ver_min_sdk
+        targetSdkVersion rootProject.ext.ver_target_sdk
         versionCode 1
-        versionName "$lib_version"
+        versionName "1.0"
+        consumerProguardFiles 'consumer-rules.pro'
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     lintOptions {
         abortOnError false
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    compileOnly "androidx.appcompat:appcompat:$appcompat_version"
-    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly 'androidx.appcompat:appcompat:1.0.2'
 }
 
-// 打包源码
 task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
     from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
+}
+
+task classJar(type: Jar, dependsOn: ['assembleRelease', 'sourcesJar']) {
+    from(project.zipTree("${project.buildDir.absolutePath}/intermediates/packaged-classes/release/classes.jar"))
+    exclude '**/R.class', '**/R$*.class', '**/**/BuildConfig.class', '**/**/BuildConfig$*.class'
 }
 
 artifacts {
     archives sourcesJar
+    archives javadocJar
+    archives classJar
 }
 
 publish {
-    repoName="android"//仓库名
-    userOrg = 'wandersnail' //bintray.com用户名  
-    groupId = 'com.github.wandersnail' //jcenter上的路径 
-    artifactId = 'swipemenulistview' //项目名称  
-    publishVersion = "$lib_version" //版本号
-    desc = '带侧滑菜单ListView'
-    website = 'https://github.com/wandersnail'
+    repoName="androidx"//仓库名
+    userOrg = user_name //bintray.com用户名  
+    groupId = lib_group //jcenter上的路径  
+    artifactId = lib_artifact //项目名称  
+    publishVersion = lib_version //版本号  
+    desc = lib_description
+    website = lib_website
+}
+
+if (project.getGradle().startParameter.taskNames.any { it.contains('bintrayUpload') }) {
+    gradle.taskGraph.whenReady { taskGraph ->
+        taskGraph.getAllTasks().find {
+            it.path == ":$project.name:generatePomFileForReleasePublication"
+        }.doLast {
+            file("build/publications/release/pom-default.xml").delete()
+            println 'Overriding pom-file to make sure we can sync to maven central!'
+            pom {
+                //noinspection GroovyAssignabilityCheck
+                project {
+                    name lib_artifact
+                    artifactId lib_artifact
+                    packaging lib_packaging
+                    description lib_description
+                    version lib_version
+                    url lib_website
+
+                    scm {
+                        url lib_website
+                        connection "scm:git:${lib_website}.git"
+                        developerConnection "scm:git:${lib_website}.git"
+                    }
+
+                    licenses {
+                        license {
+                            name 'The Apache License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id user_name
+                            name 'Zeng Fansheng'
+                            email 'bingmo977@qq.com'
+                        }
+                    }
+                }
+            }.writeTo("build/publications/release/pom-default.xml")
+        }
+    }
 }
