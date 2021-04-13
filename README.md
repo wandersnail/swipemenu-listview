@@ -56,7 +56,7 @@ allprojects {
 
 ## 代码托管
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/cn.wandersnail/swipemenu-listview/badge.svg)](https://maven-badges.herokuapp.com/maven-central/cn.wandersnail/swipemenu-listview)
-[![Download](https://api.bintray.com/packages/wandersnail/androidx/swipemenu-listview/images/download.svg) ](https://bintray.com/wandersnail/androidx/swipemenu-listview/_latestVersion)
+[![Release](https://jitpack.io/v/wandersnail/swipemenu-listview.svg)](https://jitpack.io/#wandersnail/swipemenu-listview)
 
 ## 示例效果
 ![image](https://github.com/wandersnail/swipemenu-listview/blob/master/screenshot/device-2018-05-27-191134.png)
